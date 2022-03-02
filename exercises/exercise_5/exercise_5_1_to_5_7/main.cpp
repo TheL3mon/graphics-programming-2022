@@ -247,6 +247,7 @@ void setLightUniforms()
     // TODO exercise 5 - set the missing uniform variables here
     // light uniforms
     shader->setVec3("ambientLightColor", config.ambientLightColor);
+    
 }
 
 

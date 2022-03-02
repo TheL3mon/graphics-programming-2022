@@ -32,8 +32,8 @@ void main() {
 
    // TODO 5.1 ambient
    // ambient reflectance term = ambient intensity * ambient reflectance * reflection color
-   vec3 temp = 1.0 * ambientReflectance * reflectionColor;
-   shadedColor = vec4(temp, 1.0);
+   vec3 reflectionTerm = 1.0 * ambientReflectance * reflectionColor;
+   
 
    // TODO 5.2 diffuse
 
@@ -44,5 +44,5 @@ void main() {
 
    // TODO set the output color to the shaded color that you have computed
    shadedColor = vec4(.8, .8, .8, 1.0);
-
+   shadedColor = vec4(reflectionTerm, 1.0);
 }
