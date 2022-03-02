@@ -246,7 +246,14 @@ void setLightUniforms()
 {
     // TODO exercise 5 - set the missing uniform variables here
     // light uniforms
+    //ambient
     shader->setVec3("ambientLightColor", config.ambientLightColor);
+
+    //diffuse
+    shader->setVec3("light1Position", config.light1Position);
+    shader->setVec3("light1Color", config.light1Color);
+    shader->setFloat("diffuseReflectance", config.diffuseReflectance);
+    shader->setFloat("light1Intensity", config.light1Intensity);
     
 }
 

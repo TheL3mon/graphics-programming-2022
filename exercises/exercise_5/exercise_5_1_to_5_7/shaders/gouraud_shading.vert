@@ -13,6 +13,10 @@ out vec4 shadedColor;
 // TODO exercise 5 setup the uniform variables needed for lighting
 // light uniform variables
 uniform vec3 ambientLightColor;
+uniform vec3 light1Position;
+uniform vec3 light1Color;
+uniform float diffuseReflectance;
+uniform float light1Intensity;
 
 // material properties
 uniform float ambientReflectance;
@@ -36,6 +40,7 @@ void main() {
    
 
    // TODO 5.2 diffuse
+   // vec3 diffuseReflection = light1Intensity * diffuseReflectance * dot(P,N) * light1Color;
 
    // TODO 5.3 specular
 
