@@ -12,8 +12,11 @@ out vec4 shadedColor;
 
 // TODO exercise 5 setup the uniform variables needed for lighting
 // light uniform variables
+uniform vec3 ambientLightColor;
 
 // material properties
+uniform float ambientReflectance;
+uniform vec3 reflectionColor;
 
 
 void main() {
@@ -28,6 +31,7 @@ void main() {
    // TODO exercises 5.1, 5.2 and 5.3 - Gouraud shading (i.e. Phong reflection model computed in the vertex shader)
 
    // TODO 5.1 ambient
+   // ambient reflectance term = ambient intensity * ambient reflectance * reflection color
 
    // TODO 5.2 diffuse
 

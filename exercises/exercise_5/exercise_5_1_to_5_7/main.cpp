@@ -246,6 +246,7 @@ void setLightUniforms()
 {
     // TODO exercise 5 - set the missing uniform variables here
     // light uniforms
+    shader->setVec3("ambientLightColor", config.ambientLightColor);
 }
 
 
@@ -256,6 +257,8 @@ void drawObjects(){
 
     // TODO exercise 5 - set the missing uniform variables here
     // material uniforms
+    shader->setFloat("ambientReflectance", config.ambientReflectance);
+    shader->setVec3("reflectionColor", config.reflectionColor);
 
 
 
