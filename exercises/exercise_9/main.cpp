@@ -127,8 +127,14 @@ struct Config
 
 
     //TODO 9.1 9.2 9.4 9.5 and 9.6 : Add configuration values
+    //9.1
     float exponent = 1.0f;
 
+    //9.2
+    float contrast = 1.0f;
+    float hueshift = 0.0f;
+    float saturation = 1.0f;
+    glm::vec3 colorfilter = glm::vec3(1.0f, 1.0f, 1.0f);
 
 
 
@@ -392,6 +398,10 @@ int main()
 
 
                 //TODO 9.2 : Add the color grading uniforms
+                shader->setFloat("contrast", config.contrast);
+                shader->setFloat("hueshift", config.hueshift);
+                shader->setFloat("saturation", config.saturation);
+                shader->setVec3("colorfilter", config.colorfilter);
 
 
 
@@ -497,8 +507,14 @@ void drawGui(){
 
         ImGui::Text("Post-processing: ");
         //TODO 9.1 9.2 9.4 9.5 and 9.6 : Add UI for configuration values
+        //9.1
         ImGui::SliderFloat("exponent", &config.exponent, 0.0f, 1.0f);
 
+        //9.2
+        ImGui::SliderFloat("contrast", &config.contrast, 0.5f, 1.5f);
+        ImGui::SliderFloat("hueshift", &config.hueshift, -0.5f, 0.5f);
+        ImGui::SliderFloat("saturation", &config.saturation, 0.0f, 5.0f);
+        ImGui::ColorEdit3("light 1 color", (float*)&config.colorfilter);
 
 
 

@@ -8,7 +8,14 @@ uniform sampler2D SourceTexture;
 
 
 //TODO 9.1 and 9.2 : Add uniforms here
+//9.1
 uniform float exposure;
+
+//9.2
+uniform float contrast;
+uniform float hueshift;
+uniform float saturation;
+uniform vec3 colorfilter;
 
 
 
