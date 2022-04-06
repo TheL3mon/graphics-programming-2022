@@ -48,7 +48,7 @@ SDFGeometry* s_CubeGeometry = nullptr;
 
 // TODO 10.1 : global variables for parameters in UI for exercise 10.1
 glm::vec3 sphereColor(0.0f, 0.0f, 1.0f);
-glm::vec3 sphereCenter(-2.0f, 0.0f, 0.0f);
+glm::vec3 sphereCenter(-2.0f, 0.0f, -10.0f);
 GLfloat sphereRadius(1.25f);
 
 glm::vec3 boxColor(1.0f, 0.0f, 0.0f);
@@ -101,19 +101,23 @@ int main()
         lastFrame = currentFrame;
 
         // TODO 10.1 : Set sphere uniforms here, as material properties
-
+        glm::mat4 sphereMatrix(1.0f);
+        sphereMatrix = glm::translate(sphereMatrix, sphereCenter);
+        defaultMaterial.SetPropertyValue<glm::vec3>("sphereColor", sphereColor);
+        defaultMaterial.SetPropertyValue<glm::vec3>("sphereCenter", sphereCenter);
+        defaultMaterial.SetPropertyValue<float>("sphereRadius", sphereRadius);
 
 
 
         // TODO 10.1 : Material properties for the box, uncomment
-        //glm::mat4 boxMatrix(1.0f);
-        //boxMatrix = glm::translate(boxMatrix, boxCenter);
-        //boxMatrix = glm::rotate(boxMatrix, boxRotation.z, glm::vec3(0, 0, 1));
-        //boxMatrix = glm::rotate(boxMatrix, boxRotation.x, glm::vec3(1, 0, 0));
-        //boxMatrix = glm::rotate(boxMatrix, boxRotation.y, glm::vec3(0, 1, 0));
-        //defaultMaterial.SetPropertyValue<glm::mat4>("boxMatrix", s_Camera->GetViewMatrix() * boxMatrix);
-        //defaultMaterial.SetPropertyValue<glm::vec3>("boxColor", boxColor);
-        //defaultMaterial.SetPropertyValue<glm::vec3>("boxSize", boxSize);
+        glm::mat4 boxMatrix(1.0f);
+        boxMatrix = glm::translate(boxMatrix, boxCenter);
+        boxMatrix = glm::rotate(boxMatrix, boxRotation.z, glm::vec3(0, 0, 1));
+        boxMatrix = glm::rotate(boxMatrix, boxRotation.x, glm::vec3(1, 0, 0));
+        boxMatrix = glm::rotate(boxMatrix, boxRotation.y, glm::vec3(0, 1, 0));
+        defaultMaterial.SetPropertyValue<glm::mat4>("boxMatrix", s_Camera->GetViewMatrix() * boxMatrix);
+        defaultMaterial.SetPropertyValue<glm::vec3>("boxColor", boxColor);
+        defaultMaterial.SetPropertyValue<glm::vec3>("boxSize", boxSize);
 
 
         // TODO 10.2 : Set uniforms here, as material properties
@@ -273,8 +277,9 @@ void drawGui()
             ImGui::Separator();
 
             //TODO 10.1 : We are missing some properties!
-
-
+            ImGui::ColorEdit3("Box Color", (float*)&boxColor);
+            ImGui::DragFloat3("Box Center", (float*)&boxCenter, 2.0f, -100, 100);
+            ImGui::DragFloat3("Box Size", (float*)&boxSize, 1.0f, -100, 100);
 
             ImGui::SliderAngle("Box Rotation X", (float*)&boxRotation.x, -180.0f, 180.0f);
             ImGui::SliderAngle("Box Rotation Y", (float*)&boxRotation.y, -180.0f, 180.0f);
