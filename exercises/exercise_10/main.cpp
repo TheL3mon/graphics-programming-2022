@@ -72,10 +72,17 @@ int main()
     createGlobalObjects();
 
     // Add new full scren quad object
-    SDFShader defaultShader(SHADER_FOLDER "raymarcher.vert", SHADER_FOLDER "exercise10_1.frag");
+    /*SDFShader defaultShader(SHADER_FOLDER "raymarcher.vert", SHADER_FOLDER "exercise10_1.frag");
+    SDFMaterial defaultMaterial(&defaultShader);
+    SDFObject defaultObject(s_QuadGeometry, &defaultMaterial);
+    s_RayMarcher->AddObject(&defaultObject);*/
+
+    // 10.2 new scene
+    SDFShader defaultShader(SHADER_FOLDER "raymarcher.vert", SHADER_FOLDER "interesting.frag");
     SDFMaterial defaultMaterial(&defaultShader);
     SDFObject defaultObject(s_QuadGeometry, &defaultMaterial);
     s_RayMarcher->AddObject(&defaultObject);
+
 
     // EXTRA: Object using a cube instead of a full screen pass
     //SDFShader sphereShader(SHADER_FOLDER "raymarcher.vert", SHADER_FOLDER "sphere_lit.frag");
