@@ -12,7 +12,7 @@ uniform vec3 boxSize;
 // Configure ray marcher
 void GetRayMarcherConfig(out int maxSteps, out float maxDistance, out float surfaceDistance)
 {
-    maxSteps = 1;
+    maxSteps = 10;
     maxDistance = 100.0f;
     surfaceDistance = 0.001f;
 }
@@ -39,10 +39,11 @@ float GetDistance(vec3 p, inout Output o)
     float dBox = sdfBox(transformToLocal(p, boxMatrix), boxSize);
 
     // TODO 10.1 : Replace min with smin and try different small values of k
-    float d = min(dSphere, dBox);
+    float blendFactor;
+    float d = smin(dSphere, dBox, 0.5f, blendFactor);
 
     // TODO 10.1 : Replace this with a mix, using the blend factor from smin
-    o.color = d == dSphere ? sphereColor : boxColor;
+    o.color = mix(sphereColor, boxColor, blendFactor);//== dSphere ? sphereColor : boxColor;
 
     return d;
 }
