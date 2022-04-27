@@ -98,7 +98,7 @@ struct Config
     bool enableCulling = true;
 
     // TODO 12.2 : Change the default value to true
-    bool enableInstancing = false;
+    bool enableInstancing = true;
 } config;
 
 // structure to hold car instances
@@ -530,6 +530,7 @@ void drawObjects()
         for (const Car& car : cars)
         {
             // TODO 12.1 : Only execute this block if culling is not enabled or if the bounding sphere is visible in cullingCamera
+            if(isFrustumVisibleSphere(cullingCamera,car.modelMatrix,2.5f) || !config.enableCulling)
             {
                 shader->setMat4("model", car.modelMatrix);
                 shader->setVec4("reflectionColor", car.color);
@@ -545,13 +546,16 @@ void drawObjects()
 
         // TODO 12.3 : Bind the visible instance buffer, if culling is enabled, or source instance buffer, if it is not
         // TODO 12.2 : Bind the source instance buffer as GL_SHADER_STORAGE_BUFFER, with index 0
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, sourceInstanceBuffer);
+        glBufferData(GL_SHADER_STORAGE_BUFFER, cars.size() * sizeof(Car), cars.data(), GL_STATIC_DRAW);
 
 
         // TODO 12.3 : Add an extra parameter with the indirect buffer, if culling is enabled, or 0, if it is not
         // TODO 12.2 : Draw the carPaintModel, using the same shader, but with an extra parameter for the number of cars
-
+        carPaintModel->Draw(*shader,5);
 
         // TODO 12.2 : Unbind the GL_SHADER_STORAGE_BUFFER
+        glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 
     }
 
@@ -578,8 +582,10 @@ bool isFrustumVisibleSphere(const Camera& camera, const glm::mat4& matrix, float
         camera.GetFrustumPlane((Camera_Planes)plane, planePoint, planeNormal);
 
         // TODO 12.1 : Get the distance of the center to the plane and compare it to the radius. If it is not visible, return false.
-
-
+        if (dot(center-planePoint, planeNormal) < -radius)
+        {
+            return false;
+        }
 
     }
     return visible;

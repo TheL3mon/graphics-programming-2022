@@ -98,7 +98,14 @@ public:
         else
         {
             // TODO 12.2 : if instance count is greater than one, we want to use glDrawElementsInstanced instead
-            glDrawElements(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, 0);
+            if (instanceCount > 1)
+            {
+                glDrawElementsInstanced(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, 0, instanceCount);
+            }
+            else
+            {
+                glDrawElements(GL_TRIANGLES, (int)indices.size(), GL_UNSIGNED_INT, 0);
+            }
         }
 
         glBindVertexArray(0);
