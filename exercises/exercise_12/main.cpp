@@ -547,7 +547,8 @@ void drawObjects()
         // TODO 12.3 : Bind the visible instance buffer, if culling is enabled, or source instance buffer, if it is not
         // TODO 12.2 : Bind the source instance buffer as GL_SHADER_STORAGE_BUFFER, with index 0
         glBindBuffer(GL_SHADER_STORAGE_BUFFER, sourceInstanceBuffer);
-        glBufferData(GL_SHADER_STORAGE_BUFFER, cars.size() * sizeof(Car), cars.data(), GL_STATIC_DRAW);
+        //glBufferData(GL_SHADER_STORAGE_BUFFER, cars.size() * sizeof(Car), cars.data(), GL_STATIC_DRAW);
+        //glBindBufferBase(GL_SHADER_STORAGE_BUFFER, 0, sourceInstanceBuffer);
 
 
         // TODO 12.3 : Add an extra parameter with the indirect buffer, if culling is enabled, or 0, if it is not
